@@ -162,6 +162,9 @@ var Quickjump4ward = new Class({
 				case 'prod': case 'product':
 					data.get = 'product';
 				break;
+                case 'f': case 'function':
+                    data.get = 'function';
+                break;
 				default:
 					data.get = sect;
 				break;

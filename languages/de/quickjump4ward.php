@@ -12,6 +12,8 @@ $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 	array('<u>a:</u> Artikel', 'Der Modifier <u>a:</u> sucht nur Artikel.'),
 	array('<u>pl:</u> Seitenlayouts', 'Der Modifier <u>pl:</u> durchsucht die Themes nach Seitenlayouts.'),
 	array('<u>css:</u> Stylesheets', 'Der Modifier <u>css:</u> sucht nach Stylesheets. Die Filterung nach Kategorien wird direkt untersützt:
-	 <i>css:layout:Navi</i> wechselt in die Kategrie Navi im Stylesheet layout.')
+	 <i>css:layout:Navi</i> wechselt in die Kategrie Navi im Stylesheet layout.'),
+    array('<u>f:</u> Function', 'Der Modifier <u>f:</u> listet Funktionen wie das Datenbankupdate auf.'),
+
 );
 

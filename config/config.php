@@ -29,9 +29,9 @@
 // Insert javascripts
 if(TL_MODE == 'BE')
 {
-	$GLOBALS['TL_JAVASCRIPT']['autocompleter']  = 'plugins/autocompleter/js/ac_compress.src.js';
-	$GLOBALS['TL_CSS']['autocompleter'] 		= 'plugins/autocompleter/css/auto_completer.css';
-	$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.js';
-	$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.css';
+$GLOBALS['TL_JAVASCRIPT']['autocompleter'] = 'plugins/autocompleter/js/ac_compress.js';
+$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.js';
+
+$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.css';
 }
 ?>

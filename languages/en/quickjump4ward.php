@@ -12,6 +12,7 @@ $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 	array('<u>a:</u> Article', 'The modifier <u>a:</u> searches only articles.'),
 	array('<u>pl:</u> Pagelayout', 'The modifier <u>pl:</u> searches pagelayouts in the themes.'),
 	array('<u>css:</u> Stylesheets', 'The modifier <u>css:</u> searches only stylesheets. You can also select catogries with 
-	e.g. <i>css:layout:Navi</i> to select the layout-stylesheet with category-filter Navi.')
+	e.g. <i>css:layout:Navi</i> to select the layout-stylesheet with category-filter Navi.'),
+    array('<u>f:</u> Function', 'The modifier <u>f:</u> lists functions like the database update.'),
 );
 

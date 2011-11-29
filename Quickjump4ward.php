@@ -64,6 +64,8 @@ class Quickjump4ward extends Backend {
                         $this->addLayouts($s);                 
                 if($type == 'stylesheet' || ($type == 'all' && in_array('stylesheet',$autoTypes)))
                         $this->addStylesheets($s);                     
+                if($type == 'function' || ($type == 'all' && in_array('function',$autoTypes)))
+                        $this->addFunctions($s);
 
                 // HOOK
                 if(is_array($GLOBALS['TL_HOOKS']['quickjump4ward']) && count($GLOBALS['TL_HOOKS']['quickjump4ward']) > 0)
@@ -74,7 +76,7 @@ class Quickjump4ward extends Backend {
                                 $this->ret = array_merge($this->ret,$this->$callback[0]->$callback[1]($s, $type));
                         }
                 }      
-                       
+
                 return $this->ret;
         }
 
@@ -102,6 +104,7 @@ class Quickjump4ward extends Backend {
                 }
         }
 
+
         /**
          * Add pagelayouts to ret-array
          * @TODO access restriction
@@ -125,6 +128,24 @@ class Quickjump4ward extends Backend {
                         );
                 }
         }
+
+
+        /**
+         * Add functions to ret-array
+         * @TODO access restriction
+         * @param str $s
+         */
+        protected function addFunctions($s)
+        {
+                $this->ret[] = array
+                (
+                        'type'  => 'function',
+                        'name'  => 'f:Database update',
+                        'url'   => $this->base.'main.php?do=repository_manager&update=database',
+                        'image' => $this->generateImage('system/modules/rep_client/themes/default/images/dbcheck16.png')
+                );
+        }
+
 
         /**
          * Add stylesheets to ret-array
@@ -174,7 +195,8 @@ class Quickjump4ward extends Backend {
                		}
 				}
         }
-       
+
+
         /**
          * Add articles to ret-array
          * @param str $s
