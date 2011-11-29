@@ -66,6 +66,8 @@ class Quickjump4ward extends Backend {
                         $this->addStylesheets($s);                     
                 if($type == 'function' || ($type == 'all' && in_array('function',$autoTypes)))
                         $this->addFunctions($s);
+                if($type == 'new' || ($type == 'all' && in_array('new',$autoTypes)))
+                        $this->addNewElemes($s);
 
                 // HOOK
                 if(is_array($GLOBALS['TL_HOOKS']['quickjump4ward']) && count($GLOBALS['TL_HOOKS']['quickjump4ward']) > 0)
@@ -194,6 +196,71 @@ class Quickjump4ward extends Backend {
                         );
                		}
 				}
+        }
+
+        /**
+         * Add new elements creators to ret-array
+         * @TODO access restriction
+         * @param str $s
+         */
+        protected function addNewElemes($s)
+        {
+            $objThemes = $this->Database->execute('SELECT id,name FROM tl_theme ORDER BY name');
+            $arrThemes = array();
+            while($objThemes->next()) $arrThemes[$objThemes->id] = $objThemes->name;
+
+
+            if(strrpos($s,':') !== false)
+            {
+                $data = explode(':',$s);
+
+                if(!strlen($data[1]) || strripos('Module',$data[1]) !== false)
+                {
+                    $this->ret[] = array
+                    (
+                           'type'  => 'new',
+                           'name'  => 'new:'.$data[0].':Module',
+                           'url'   => $this->base.'main.php?do=themes&table=tl_module&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
+                           'image' => $this->generateImage('modules.gif')
+                    );
+                }
+                if(!strlen($data[1]) || strripos('Stylesheet',$data[1]) !== false)
+                {
+                    $this->ret[] = array
+                    (
+                           'type'  => 'new',
+                           'name'  => 'new:'.$data[0].':Stylesheet',
+                           'url'   => $this->base.'main.php?do=themes&table=tl_style_sheet&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
+                           'image' => $this->generateImage('css.gif')
+                    );
+                }
+                if(!strlen($data[1]) || strripos('Pagelayout',$data[1]) !== false)
+                {
+
+                    $this->ret[] = array
+                    (
+                           'type'  => 'new',
+                           'name'  => 'new:'.$data[0].':Pagelayout',
+                           'url'   => $this->base.'main.php?do=themes&table=tl_layout&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
+                           'image' => $this->generateImage('layout.gif')
+                    );
+                }
+            }
+            else
+            {
+                //show themes
+                foreach($arrThemes as $id => $name)
+                {
+                    if(strlen($s) && strripos($name,$s) === false) continue;
+                    $this->ret[] = array
+                    (
+                           'type'  => 'new',
+                           'name'  => 'new:'.$name,
+                           'url'   => $this->base.'main.php?do=themes',
+                           'image' => $this->generateImage('themes.gif')
+                    );
+                }
+            }
         }
 
 
