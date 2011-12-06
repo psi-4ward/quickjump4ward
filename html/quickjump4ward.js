@@ -18,19 +18,37 @@ var Quickjump4ward = new Class({
 		this.setOptions(options);
 		
 		// Init the form
-		this.container = new Element("div", {
-			id: "quickjump4ward",
-			styles: {
-				'text-align':'left',
-				'background-color':'#F3F3F3',
-				'border-top':'1px solid #BBBBBB'
-			}
-		}).inject($('header'),'bottom').adopt(
+        if(CONTAO_THEME != 'smart_backend_theme')
+        {
+            this.container = new Element("div", {
+          			id: "quickjump4ward",
+          			styles: {
+          				'text-align':'left',
+          				'background-color':'#F3F3F3',
+          				'border-top':'1px solid #BBBBBB'
+          			}
+          		}).inject($('header'),'bottom');
+        }
+        else
+        {
+            this.container = new Element("div", {
+          			id: "quickjump4ward",
+          			styles: {
+          				'text-align':'left',
+                        'width':'205px',
+                        'position':'fixed',
+                        'margin-top':'5px'
+          			}
+          		}).inject($('container'),'top');
+        }
+
+        this.container.adopt(
 			this.form = new Element("form",{
 				'events':{ 'submit':this.onSubmit.bind(this) }
 			}).adopt(this.input = new Element("input", {
 					'styles': {
-						'color': "#606060"
+						'color': "#606060",
+                        'width': ((CONTAO_THEME == 'smart_backend_theme') ? '180px' : '314px')
 					},
 					'class': 'tl_text',
 					'value': this.options.searchText,
@@ -65,6 +83,7 @@ var Quickjump4ward = new Class({
 	        'postVar': 's',
 	        'injectChoice':this.generateChoice,
 	        'autoSubmit':true,
+            'width':'314px',
 	        'onSelection':function(inp,el,sel,val,x){
 	    		if(val.substr(-1) == ':') return;
 	    		this.currentHref = el.retrieve('url');
@@ -162,12 +181,6 @@ var Quickjump4ward = new Class({
 				case 'prod': case 'product':
 					data.get = 'product';
 				break;
-                case 'f': case 'function':
-                    data.get = 'function';
-                break;
-                case 'new':
-                    data.get = 'new';
-                break;
 				default:
 					data.get = sect;
 				break;
