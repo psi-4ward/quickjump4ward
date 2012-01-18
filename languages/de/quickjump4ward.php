@@ -4,7 +4,7 @@ $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['label'][0] = 'Quick
 
 $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 (
-	array('Hotkey', '<p>Mit der Tastenkombination <i>Strg-j</i> kann direkt ins Quickjump-Feld gesprungen werden.</p>
+	array('Hotkey', '<p>Mit der Tastenkombination <i>Strg-j</i> oder <i>Strg-q</i> kann direkt ins Quickjump-Feld gesprungen werden.</p>
 	<p>Per <i>Tab</i> wird die Vervollständigung erneut angestoßen um ggf. Unterobjekte abzurufen. Bei Problemen mit <i>Tab</i> kann auch die <i>Pfeil-nach-rechts</i> Taste verwendet werden.</p>
 	<p>Die <i>Enter</i>-Taste ruft die gewählte Seite auf.</p>'),
 	array('<u>p:</u> Seiten', 'Der Modifier <u>p:</u> sucht Seiten aus der Seitenstruktur.'),
