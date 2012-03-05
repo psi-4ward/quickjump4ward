@@ -17,6 +17,9 @@ var Quickjump4ward = new Class({
 	initialize: function(options){
 		this.setOptions(options);
 		
+		// do nothing if we are in an popup window
+		if($(document.body).hasClass('popup')) return;		
+		
 		// Init the form
         if(CONTAO_THEME != 'smart_backend_theme')
         {
