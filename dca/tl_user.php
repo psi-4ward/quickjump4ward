@@ -41,7 +41,7 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['quickjump4ward'] = array
 foreach($GLOBALS['TL_DCA']['tl_user']['palettes'] as $k => $v)
 {
 	if($k == '__selector__') continue;
-	$GLOBALS['TL_DCA']['tl_user']['palettes'][$k] = str_replace(';{theme_legend',';{quickjump4ward_legend},quickjump4ward;{theme_legend',$v);
+	$GLOBALS['TL_DCA']['tl_user']['palettes'][$k] = str_replace(';{password_legend',';{quickjump4ward_legend},quickjump4ward;{password_legend',$v);
 }
 
 
