@@ -14,7 +14,7 @@ $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 	array('<u>css:</u> Stylesheets', 'Der Modifier <u>css:</u> sucht nach Stylesheets. Die Filterung nach Kategorien wird direkt untersützt:
 	 <i>css:layout:Navi</i> wechselt in die Kategrie Navi im Stylesheet layout.'),
     array('<u>f:</u> Function', 'Der Modifier <u>f:</u> listet Funktionen wie das Datenbankupdate auf.'),
-    array('<u>new:</u> Neues Element', 'Der Modifier <u>new:</u> sucht nach Themes. Als zweite Verfollständigung kann Modul, Stylesheet oder das Seitenlayout gewählt werden um eines dieser Elemente zu erstellen.'),
+    array('<u>new:</u> Neues Element', 'Der Modifier <u>new:</u> sucht nach Themes. Als zweite Vervollständigung kann Modul, Stylesheet oder das Seitenlayout gewählt werden um eines dieser Elemente zu erstellen.'),
 
 );
 
