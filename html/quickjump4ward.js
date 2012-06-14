@@ -164,32 +164,14 @@ var Quickjump4ward = new Class({
 		if(val.indexOf(':') > 0){
 			var sect = val.slice(0,val.indexOf(':'));
 			data.s = val.slice(val.indexOf(':')+1).trim();
-			
-			switch(sect){
-				case 'p': case 'page':
-					data.get = 'page';
-				break;
-				case 'a': case 'article:':
-					data.get = 'article';
-				break;
-				case 'm': case 'module:':
-					data.get = 'module';
-				break;
-				case 'pl': case 'layout:': case 'pagelayout':
-					data.get = 'pagelayout';
-					break;
-				case 'css':
-					data.get = 'stylesheet';
-					break;
-				case 'prod': case 'product':
-					data.get = 'product';
-				break;
-                case 'f': case 'function':
-                    data.get = 'function';
-                break;
-				default:
-					data.get = sect;
-				break;
+
+			if(typeof Quickjump4ward.sections[sect] != 'undefined')
+			{
+				data.get = Quickjump4ward.sections[sect]
+			}
+			else
+			{
+				data.get = sect;
 			}
 		}
 	},
@@ -209,9 +191,18 @@ var Quickjump4ward = new Class({
 	    });
 	    el.inject(this.choices);
 	}
-	
-	
+
 });
+
+if(typeof Quickjump4ward.sections != 'object') Quickjump4ward.sections = new Object();
+Quickjump4ward.sections['p']		= 'page';
+Quickjump4ward.sections['a']		= 'article';
+Quickjump4ward.sections['m']		= 'module';
+Quickjump4ward.sections['pl']		= 'pagelayout';
+Quickjump4ward.sections['layout']	= 'pagelayout';
+Quickjump4ward.sections['css']		= 'stylesheet';
+Quickjump4ward.sections['f']		= 'function';
+
 
 window.addEvent('domready',function(){
 	var quickjump4ward = new Quickjump4ward();
