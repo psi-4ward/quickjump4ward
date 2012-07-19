@@ -1,4 +1,15 @@
 <?php
+
+/**
+ * Quickjump4ward
+ *
+ * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @package    quickjump4ward
+ * @license    LGPL
+ * @filesource
+ */
+
 $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['explanation'] = 'quickjump4ward';
 $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['label'][0] = 'Quickjump4ward - searchmodifier';
 

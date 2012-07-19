@@ -1,7 +1,7 @@
 /**
  * Quickjump4ward class
  * @autor Christoph Wiechert <wio@psitrax.de>
- * @copyright 2010 by 4ward.media 
+ * @copyright 2012 by 4ward.media <http://www.4wardmedia.de>
  */
 var Quickjump4ward = new Class({
 	
@@ -21,7 +21,7 @@ var Quickjump4ward = new Class({
 		if($(document.body).hasClass('popup')) return;		
 		
 		// Init the form
-        if(CONTAO_THEME != 'smart_backend_theme')
+        if(Contao.theme != 'smart_backend_theme')
         {
             this.container = new Element("div", {
           			id: "quickjump4ward",
@@ -51,7 +51,7 @@ var Quickjump4ward = new Class({
 			}).adopt(this.input = new Element("input", {
 					'styles': {
 						'color': "#606060",
-                        'width': ((CONTAO_THEME == 'smart_backend_theme') ? '180px' : '314px')
+                        'width': ((Contao.theme == 'smart_backend_theme') ? '180px' : '314px')
 					},
 					'class': 'tl_text',
 					'value': this.options.searchText,
