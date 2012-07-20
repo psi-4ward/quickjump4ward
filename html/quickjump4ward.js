@@ -24,7 +24,10 @@ var Quickjump4ward = new Class({
 	 */
 	initialize: function(options){
 		this.setOptions(options);
-		
+
+		// run some actions
+		if(this.executeDo()) return;
+
 		// do nothing if we are in an popup window
 		if($(document.body).hasClass('popup')) return;		
 		
@@ -134,6 +137,32 @@ var Quickjump4ward = new Class({
 			$(window).addEvent('keypress',this.keypress.bind(this));
 		}	    
 	},
+
+
+	/**
+	 * Run some actions like form submits
+	 */
+	executeDo: function()
+	{
+		var url = new URI(document.location.href);
+		if(!url.getData('quickjump4ward')) return false;
+		switch(url.getData('quickjump4ward'))
+		{
+			case 'doClearCache':
+				var frm = document.getElement('input[value=tl_purge]')
+				if(!frm) return false;
+				frm = frm.getParent('form');
+				frm.getElements('input[value=tl_requestcache], input[value=tl_folder], input[value=scripts_folder], input[value=temp_folder], input[value=css_files], input[value=xml_files]').each(function(el){
+					el.checked = true;
+				});
+				frm.set('action',frm.get('action').replace("&quickjump4ward=doClearCache",''));
+				frm.submit();
+				return true;
+			break;
+		}
+		return false;
+	},
+
 
 	/**
 	 * Handle the form-submit that Autocompleter triggers

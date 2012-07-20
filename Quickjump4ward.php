@@ -94,7 +94,6 @@ class Quickjump4ward extends Backend {
 
 	/**
 	 * Add pagelayouts to ret-array
-	 * @TODO access restriction
 	 * @param str $s
 	 */
 	protected function addLayouts($s)
@@ -119,24 +118,45 @@ class Quickjump4ward extends Backend {
 
 	/**
 	 * Add functions to ret-array
-	 * @TODO access restriction
 	 * @param str $s
 	 */
 	protected function addFunctions($s)
 	{
-		$this->ret[] = array
+		$arrFunc = array();
+		$arrFunc[] = array
 		(
 			'type'  => 'function',
 			'name'  => 'f:Database update',
 			'url'   => $this->base.'main.php?do=repository_manager&update=database',
 			'image' => $this->generateImage('system/modules/rep_client/themes/default/images/dbcheck16.png')
 		);
+		$arrFunc[] = array
+		(
+			'type'  => 'function',
+			'name'  => 'f:Cache löschen',
+			'url'   => $this->base.'main.php?do=maintenance&quickjump4ward=doClearCache',
+			'image' => $this->generateImage('cache.gif')
+		);
+		$arrFunc[] = array
+		(
+			'type'  => 'function',
+			'name'  => 'f:Extension installieren',
+			'url'   => $this->base.'main.php?do=repository_manager&install=extension',
+			'image' => $this->generateImage('system/modules/rep_client/themes/default/images/install16.png')
+		);
+
+		foreach($arrFunc as $func)
+		{
+			if(empty($s) || stripos($func['name'],$s))
+			{
+				$this->ret[] = $func;
+			}
+		}
 	}
 
 
 	/**
 	 * Add stylesheets to ret-array
-	 * @TODO access restriction
 	 * @param str $s
 	 */
 	protected function addStylesheets($s)
@@ -185,7 +205,6 @@ class Quickjump4ward extends Backend {
 
 	/**
 	 * Add new elements creators to ret-array
-	 * @TODO access restriction
 	 * @param str $s
 	 */
 	protected function addNewElemes($s)
