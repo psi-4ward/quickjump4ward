@@ -2,6 +2,8 @@
 
 /**
  * Quickjump4ward
+ * A Contao-Extension to quickly access cartain backend-modules
+ * through typing
  *
  * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
  * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
@@ -12,6 +14,7 @@
 
 
 $GLOBALS['TL_LANG']['tl_user']['quickjump4ward_legend'] = 'Quickjump4ward';
+$GLOBALS['TL_LANG']['tl_user']['quickjump4ward_enabled'] = array('Quickjump4ward verwenden','Schaltet Quickjump4ward für den aktuellen Benutzer an.');
 $GLOBALS['TL_LANG']['tl_user']['quickjump4ward'] = array('Quickjump4ward - Vervollständigung','Hier können Sie die Bereich einstellen, die automatisch vervollständigt werden, wenn keine Modifier verwendet werden.');
 
 $GLOBALS['TL_LANG']['tl_user']['quickjump4wardOptions'] = array
@@ -22,5 +25,3 @@ $GLOBALS['TL_LANG']['tl_user']['quickjump4wardOptions'] = array
 	'pagelayout' => 'Seitenlayouts',
 	'page'		 => 'Seiten' 
 );
-
-?>
