@@ -1,8 +1,16 @@
+
 /**
- * Quickjump4ward class
- * @autor Christoph Wiechert <wio@psitrax.de>
- * @copyright 2010 by 4ward.media 
+ * Quickjump4ward
+ * A Contao-Extension to quickly access cartain backend-modules
+ * through typing
+ *
+ * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @package    quickjump4ward
+ * @license    LGPL
+ * @filesource
  */
+
 var Quickjump4ward = new Class({
 	
 	Implements: Options,
@@ -16,7 +24,10 @@ var Quickjump4ward = new Class({
 	 */
 	initialize: function(options){
 		this.setOptions(options);
-		
+
+		// run some actions
+		if(this.executeDo()) return;
+
 		// do nothing if we are in an popup window
 		if($(document.body).hasClass('popup')) return;		
 		
@@ -127,6 +138,32 @@ var Quickjump4ward = new Class({
 		}	    
 	},
 
+
+	/**
+	 * Run some actions like form submits
+	 */
+	executeDo: function()
+	{
+		var url = new URI(document.location.href);
+		if(!url.getData('quickjump4ward')) return false;
+		switch(url.getData('quickjump4ward'))
+		{
+			case 'doClearCache':
+				var frm = document.getElement('input[value=tl_purge]')
+				if(!frm) return false;
+				frm = frm.getParent('form');
+				frm.getElements('input[value=tl_requestcache], input[value=tl_folder], input[value=scripts_folder], input[value=temp_folder], input[value=css_files], input[value=xml_files]').each(function(el){
+					el.checked = true;
+				});
+				frm.set('action',frm.get('action').replace("&quickjump4ward=doClearCache",''));
+				frm.submit();
+				return true;
+			break;
+		}
+		return false;
+	},
+
+
 	/**
 	 * Handle the form-submit that Autocompleter triggers
 	 */
@@ -164,32 +201,14 @@ var Quickjump4ward = new Class({
 		if(val.indexOf(':') > 0){
 			var sect = val.slice(0,val.indexOf(':'));
 			data.s = val.slice(val.indexOf(':')+1).trim();
-			
-			switch(sect){
-				case 'p': case 'page':
-					data.get = 'page';
-				break;
-				case 'a': case 'article:':
-					data.get = 'article';
-				break;
-				case 'm': case 'module:':
-					data.get = 'module';
-				break;
-				case 'pl': case 'layout:': case 'pagelayout':
-					data.get = 'pagelayout';
-					break;
-				case 'css':
-					data.get = 'stylesheet';
-					break;
-				case 'prod': case 'product':
-					data.get = 'product';
-				break;
-                case 'f': case 'function':
-                    data.get = 'function';
-                break;
-				default:
-					data.get = sect;
-				break;
+
+			if(typeof Quickjump4ward.sections[sect] != 'undefined')
+			{
+				data.get = Quickjump4ward.sections[sect]
+			}
+			else
+			{
+				data.get = sect;
 			}
 		}
 	},
@@ -209,9 +228,18 @@ var Quickjump4ward = new Class({
 	    });
 	    el.inject(this.choices);
 	}
-	
-	
+
 });
+
+if(typeof Quickjump4ward.sections != 'object') Quickjump4ward.sections = new Object();
+Quickjump4ward.sections['p']		= 'page';
+Quickjump4ward.sections['a']		= 'article';
+Quickjump4ward.sections['m']		= 'module';
+Quickjump4ward.sections['pl']		= 'pagelayout';
+Quickjump4ward.sections['layout']	= 'pagelayout';
+Quickjump4ward.sections['css']		= 'stylesheet';
+Quickjump4ward.sections['f']		= 'function';
+
 
 window.addEvent('domready',function(){
 	var quickjump4ward = new Quickjump4ward();

@@ -12,5 +12,6 @@
 -- 
 
 CREATE TABLE `tl_user` (
+  `quickjump4ward_enabled` char(1) NOT NULL default '1',
   `quickjump4ward` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
