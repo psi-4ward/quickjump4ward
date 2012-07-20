@@ -129,7 +129,7 @@ class Quickjump4ward extends \Contao\Backend {
 			'type'  => 'function',
 			'name'  => 'f:Database update',
 			'url'   => $this->base.'main.php?do=repository_manager&update=database',
-			'image' => $this->generateImage('system/modules/rep_client/themes/default/images/dbcheck16.png')
+			'image' => $this->generateImage('system/modules/repository/themes/default/images/dbcheck16.png')
 		);
 		$arrFunc[] = array
 		(
@@ -143,7 +143,7 @@ class Quickjump4ward extends \Contao\Backend {
 			'type'  => 'function',
 			'name'  => 'f:Extension installieren',
 			'url'   => $this->base.'main.php?do=repository_manager&install=extension',
-			'image' => $this->generateImage('system/modules/rep_client/themes/default/images/install16.png')
+			'image' => $this->generateImage('system/modules/repository/themes/default/images/install16.png')
 		);
 
 		foreach($arrFunc as $func)
