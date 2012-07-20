@@ -1,4 +1,18 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
+/**
+ * Quickjump4ward
+ * A Contao-Extension to quickly access cartain backend-modules
+ * through typing
+ *
+ * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @package    quickjump4ward
+ * @license    LGPL
+ * @filesource
+ */
+
+
 $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['explanation'] = 'quickjump4ward';
 $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['label'][0] = 'Quickjump4ward - searchmodifier';
 

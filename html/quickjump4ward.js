@@ -1,8 +1,16 @@
+
 /**
- * Quickjump4ward class
- * @autor Christoph Wiechert <wio@psitrax.de>
- * @copyright 2010 by 4ward.media 
+ * Quickjump4ward
+ * A Contao-Extension to quickly access cartain backend-modules
+ * through typing
+ *
+ * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @package    quickjump4ward
+ * @license    LGPL
+ * @filesource
  */
+
 var Quickjump4ward = new Class({
 	
 	Implements: Options,
