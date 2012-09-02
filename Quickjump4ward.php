@@ -22,7 +22,7 @@ class Quickjump4ward extends \Contao\Backend {
 	public function __construct()
 	{
 		$this->import('BackendUser','User');
-		$this->User->authenticate();
+		if(!$this->User->id) $this->User->authenticate();
 
 		parent::__construct();
 
@@ -38,7 +38,7 @@ class Quickjump4ward extends \Contao\Backend {
 		if($type !='all') $this->limitEach *= 3;
 
 		$autoTypes = $this->User->quickjump4ward;
-		if(!is_array($autoTypes)) $autoTypes == array();
+		if(!is_array($autoTypes)) $autoTypes = array();
 
 		if($type == 'page' || ($type =='all' && in_array('page',$autoTypes)))
 			$this->addPages($s);
