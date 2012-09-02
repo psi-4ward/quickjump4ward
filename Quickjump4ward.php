@@ -21,7 +21,8 @@ class Quickjump4ward extends Backend {
 	public function __construct()
 	{
 		$this->import('BackendUser','User');
-		$this->User->authenticate();
+
+		if(!$this->User->id) $this->User->authenticate();
 
 		parent::__construct();
 
