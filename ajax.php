@@ -17,12 +17,9 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-define('BYPASS_TOKEN_CHECK',true);
 require_once('../../initialize.php');
 
-$input = Input::getInstance();
-
 // return the results as json
-$x = new Quickjump4ward();
-echo json_encode($x->getResult($input->post('s'),$input->post('get')));
+$x = new \Quickjump4ward\Quickjump4ward();
+echo json_encode($x->getResult(Input::post('s'),Input::post('get')));
 

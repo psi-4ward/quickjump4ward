@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
@@ -11,6 +11,7 @@
  * @license    LGPL
  * @filesource
  */
+
 
 $GLOBALS['TL_LANG']['tl_user']['quickjump4ward_legend'] = 'Quickjump4ward';
 $GLOBALS['TL_LANG']['tl_user']['quickjump4ward_enabled'] = array('Quickjump4ward enabled','Activate Quickjump4ward for the current user.');

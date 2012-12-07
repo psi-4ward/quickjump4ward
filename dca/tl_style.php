@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
@@ -14,12 +14,12 @@
 
 
 // set the filter for tl_styles
-if($this->Input->get('category'))
+if(Input::get('category'))
 {
 	$filter = $this->Session->get('filter');
-	$filter['tl_style_'.$this->Input->get('id')]['category'] = $this->Input->get('category');
+	$filter['tl_style_'.Input::get('id')]['category'] = Input::get('category');
 	$this->Session->set('filter',$filter);
-	$url = $this->Environment->request;
+	$url = Environment::get('request');
 	$url = preg_replace('(&category=[^&]+)','',$url);
 	$this->redirect($url);
 }

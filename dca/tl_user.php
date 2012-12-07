@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
@@ -17,7 +17,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['quickjump4ward_enabled'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['quickjump4ward_enabled'],
 	'default'				  => '1',
 	'inputType'               => 'checkbox',
-	'eval'					  => array('submitOnChange'=>true)
+	'eval'					  => array('submitOnChange'=>true),
+	'sql'					  => "char(1) NOT NULL default '1'"
 );
 
 
@@ -30,7 +31,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['quickjump4ward'] = array
 	'inputType'               => 'checkbox',
 	'options'				  => array('article','page','module','stylesheet','pagelayout'),
 	'reference'				  => &$GLOBALS['TL_LANG']['tl_user']['quickjump4wardOptions'],
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'					  => 'blob NULL'
 );
 
 $GLOBALS['TL_DCA']['tl_user']['palettes']['__selector__'][] = 'quickjump4ward_enabled';
