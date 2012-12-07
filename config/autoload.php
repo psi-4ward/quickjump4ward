@@ -10,11 +10,11 @@
  * @filesource
  */
 
-/**
- * Register the classes
- */
+
+ClassLoader::addNamespace('Psi');
+
 ClassLoader::addClasses(array
 (
 	// Models
-	'Quickjump4ward\Quickjump4ward' => 'system/modules/quickjump4ward/Quickjump4ward.php',
+	'Psi\Quickjump4ward\Quickjump4ward' => 'system/modules/quickjump4ward/Quickjump4ward.php',
 ));

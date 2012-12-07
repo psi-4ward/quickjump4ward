@@ -12,16 +12,16 @@
  * @filesource
  */
 
-namespace Quickjump4ward;
+namespace Psi\Quickjump4ward;
 
-class Quickjump4ward extends \Contao\Backend {
+class Quickjump4ward extends \Backend {
        
 	protected $ret = array();
 	protected $limitEach = 5;
 
 	public function __construct()
 	{
-		$this->import('BackendUser','User');
+		$this->import('\BackendUser','User');
 		if(!$this->User->id) $this->User->authenticate();
 
 		parent::__construct();
@@ -71,7 +71,7 @@ class Quickjump4ward extends \Contao\Backend {
 
 	/**
 	 * Add modules to ret-array
-	 * @param str $s
+	 * @param string $s
 	 */
 	protected function addModules($s)
 	{
@@ -87,7 +87,7 @@ class Quickjump4ward extends \Contao\Backend {
 				'type'  => 'module',
 				'name'  => 'm:'.$objModule->name,
 				'url'   => $this->base.'main.php?do=themes&table=tl_module&act=edit&id='.$objModule->id,
-				'image' => $this->generateImage('modules.gif')
+				'image' => \Image::getHTML('modules.gif')
 			);
 		}
 	}
@@ -111,7 +111,7 @@ class Quickjump4ward extends \Contao\Backend {
 				'type'  => 'layout',
 				'name'  => 'pl:'.$objLayout->name,
 				'url'   => $this->base.'main.php?do=themes&table=tl_layout&act=edit&id='.$objLayout->id,
-				'image' => $this->generateImage('layout.gif')
+				'image' => \Image::getHTML('layout.gif')
 			);
 		}
 	}
@@ -129,21 +129,21 @@ class Quickjump4ward extends \Contao\Backend {
 			'type'  => 'function',
 			'name'  => 'f:Database update',
 			'url'   => $this->base.'main.php?do=repository_manager&update=database',
-			'image' => $this->generateImage('system/modules/repository/themes/default/images/dbcheck16.png')
+			'image' => \Image::getHTML('system/modules/repository/themes/default/images/dbcheck16.png')
 		);
 		$arrFunc[] = array
 		(
 			'type'  => 'function',
 			'name'  => 'f:Cache löschen',
 			'url'   => $this->base.'main.php?do=maintenance&quickjump4ward=doClearCache',
-			'image' => $this->generateImage('cache.gif')
+			'image' => \Image::getHTML('cache.gif')
 		);
 		$arrFunc[] = array
 		(
 			'type'  => 'function',
 			'name'  => 'f:Extension installieren',
 			'url'   => $this->base.'main.php?do=repository_manager&install=extension',
-			'image' => $this->generateImage('system/modules/repository/themes/default/images/install16.png')
+			'image' => \Image::getHTML('system/modules/repository/themes/default/images/install16.png')
 		);
 
 		foreach($arrFunc as $func)
@@ -181,7 +181,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'stylesheet',
 					'name'  => 'css:'.$data[0].':'.$objCategory->category,
 					'url'   => $this->base.'main.php?do=themes&table=tl_style&id='.$objCategory->id.'&category='.urlencode($objCategory->category),
-					'image' => $this->generateImage('css.gif')
+					'image' => \Image::getHTML('css.gif')
 				);
 			}
 		}
@@ -198,7 +198,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'stylesheet',
 					'name'  => 'css:'.$objStylesheets->name,
 					'url'   => $this->base.'main.php?do=themes&table=tl_style&id='.$objStylesheets->id,
-					'image' => $this->generateImage('css.gif')
+					'image' => \Image::getHTML('css.gif')
 				);
 			}
 		}
@@ -226,7 +226,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Module',
 					'url'   => $this->base.'main.php?do=themes&table=tl_module&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => $this->generateImage('modules.gif')
+					'image' => \Image::getHTML('modules.gif')
 				);
 			}
 			if(!strlen($data[1]) || strripos('Stylesheet',$data[1]) !== false)
@@ -236,7 +236,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Stylesheet',
 					'url'   => $this->base.'main.php?do=themes&table=tl_style_sheet&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => $this->generateImage('css.gif')
+					'image' => \Image::getHTML('css.gif')
 				);
 			}
 			if(!strlen($data[1]) || strripos('Pagelayout',$data[1]) !== false)
@@ -247,7 +247,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Pagelayout',
 					'url'   => $this->base.'main.php?do=themes&table=tl_layout&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => $this->generateImage('layout.gif')
+					'image' => \Image::getHTML('layout.gif')
 				);
 			}
 		}
@@ -262,7 +262,7 @@ class Quickjump4ward extends \Contao\Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$name,
 					'url'   => $this->base.'main.php?do=themes',
-					'image' => $this->generateImage('themes.gif')
+					'image' => \Image::getHTML('themes.gif')
 				);
 			}
 		}
@@ -283,7 +283,7 @@ class Quickjump4ward extends \Contao\Backend {
 			foreach ($this->User->pagemounts as $root)
 			{
 				$pagemounts[] = $root;
-				$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+				$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page', true));
 			}
 			$pagemounts = array_unique($pagemounts);
 
@@ -316,7 +316,7 @@ class Quickjump4ward extends \Contao\Backend {
 				'type'  => 'article',
 				'name'  => 'a:'.$objArticle->title,
 				'url'   => $this->base.'main.php?do=article&table=tl_content&id='.$objArticle->id,
-				'image' => $this->generateImage('articles'.($published ? '' : '_').'.gif')
+				'image' => \Image::getHTML('articles'.($published ? '' : '_').'.gif')
 			);
 
 		}
@@ -338,7 +338,7 @@ class Quickjump4ward extends \Contao\Backend {
 			foreach ($this->User->pagemounts as $root)
 			{
 				$pagemounts[] = $root;
-				$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+				$pagemounts = array_merge($pagemounts, $this->Database->getChildRecords($root, 'tl_page', true));
 			}
 			$pagemounts = array_unique($pagemounts);
 		}
@@ -378,7 +378,7 @@ class Quickjump4ward extends \Contao\Backend {
 				'type'  => 'page',
 				'name'  => 'p:'.$objPage->title,
 				'url'   => $this->base.'main.php?do=page&act=edit&id='.$objPage->id,
-				'image' => $this->generateImage($image, '')
+				'image' => \Image::getHTML($image, '')
 			);
 
 		}
