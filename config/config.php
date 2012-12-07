@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
@@ -16,5 +16,5 @@
 // Insert javascripts
 if(TL_MODE == 'BE')
 {
-	$GLOBALS['TL_HOOKS']['getUserNavigation'][] = array('Quickjump4ward','injectJavascript');
+	$GLOBALS['TL_HOOKS']['getUserNavigation'][] = array('\Quickjump4ward\Quickjump4ward','injectJavascript');
 }

@@ -32,7 +32,7 @@ var Quickjump4ward = new Class({
 		if($(document.body).hasClass('popup')) return;		
 		
 		// Init the form
-        if(CONTAO_THEME != 'smart_backend_theme')
+        if(Contao.theme != 'smart_backend_theme')
         {
             this.container = new Element("div", {
           			id: "quickjump4ward",
@@ -62,7 +62,7 @@ var Quickjump4ward = new Class({
 			}).adopt(this.input = new Element("input", {
 					'styles': {
 						'color': "#606060",
-                        'width': ((CONTAO_THEME == 'smart_backend_theme') ? '180px' : '314px')
+                        'width': ((Contao.theme == 'smart_backend_theme') ? '180px' : '314px')
 					},
 					'class': 'tl_text',
 					'value': this.options.searchText,
@@ -102,6 +102,7 @@ var Quickjump4ward = new Class({
 	    		if(val.substr(-1) == ':') return;
 	    		this.currentHref = el.retrieve('url');
 	    	}.bind(this),
+			'postData': {'REQUEST_TOKEN':Contao.request_token},
 	    	'onRequest': this.generateRequest.bind(this)
 	    });
 
@@ -152,7 +153,7 @@ var Quickjump4ward = new Class({
 				var frm = document.getElement('input[value=tl_purge]')
 				if(!frm) return false;
 				frm = frm.getParent('form');
-				frm.getElements('input[value=tl_requestcache], input[value=tl_folder], input[value=scripts_folder], input[value=temp_folder], input[value=css_files], input[value=xml_files]').each(function(el){
+				frm.getElements('input[value=images], input[value=scripts], input[value=pages], input[value=internal], input[value=temp], input[value=xml]').each(function(el){
 					el.checked = true;
 				});
 				frm.set('action',frm.get('action').replace("&quickjump4ward=doClearCache",''));
