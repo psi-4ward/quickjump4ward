@@ -102,6 +102,7 @@ var Quickjump4ward = new Class({
 	    		if(val.substr(-1) == ':') return;
 	    		this.currentHref = el.retrieve('url');
 	    	}.bind(this),
+			'postData': {'REQUEST_TOKEN':Contao.request_token},
 	    	'onRequest': this.generateRequest.bind(this)
 	    });
 

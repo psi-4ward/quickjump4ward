@@ -17,7 +17,6 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-define('BYPASS_TOKEN_CHECK',true);
 require_once('../../initialize.php');
 
 // return the results as json
