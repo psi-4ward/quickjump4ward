@@ -219,7 +219,7 @@ var Quickjump4ward = new Class({
 	 * this represents the Autocompleter object
 	 */
 	generateChoice: function(val){
-	    var el = new Element('li').set('html',val.image+' '+val.name).store('url',val.url);
+	    var el = new Element('li').set('html',val.image+' '+val.name).store('url',val.url+'&rt='+Contao.request_token);
 	    el.inputValue = val.name;
 	    el.addEvents({
 	    	'mouseover': this.choiceOver.bind(this, el),
