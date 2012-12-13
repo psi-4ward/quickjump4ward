@@ -14,7 +14,7 @@
 
 
 // Insert javascripts
-if(TL_MODE == 'BE')
+if(TL_MODE == 'BE' && \Input::get('do') != 'repository_manager')
 {
 	$GLOBALS['TL_HOOKS']['getUserNavigation'][] = array('\Quickjump4ward\Quickjump4ward','injectJavascript');
 }
