@@ -87,7 +87,7 @@ class Quickjump4ward extends \Backend {
 				'type'  => 'module',
 				'name'  => 'm:'.$objModule->name,
 				'url'   => $this->base.'main.php?do=themes&table=tl_module&act=edit&id='.$objModule->id,
-				'image' => \Image::getHTML('modules.gif')
+				'image' => $this->generateImage('modules.gif')
 			);
 		}
 	}
@@ -111,7 +111,7 @@ class Quickjump4ward extends \Backend {
 				'type'  => 'layout',
 				'name'  => 'pl:'.$objLayout->name,
 				'url'   => $this->base.'main.php?do=themes&table=tl_layout&act=edit&id='.$objLayout->id,
-				'image' => \Image::getHTML('layout.gif')
+				'image' => $this->generateImage('layout.gif')
 			);
 		}
 	}
@@ -129,21 +129,21 @@ class Quickjump4ward extends \Backend {
 			'type'  => 'function',
 			'name'  => 'f:Database update',
 			'url'   => $this->base.'main.php?do=repository_manager&update=database',
-			'image' => \Image::getHTML('system/modules/repository/themes/default/images/dbcheck16.png')
+			'image' => $this->generateImage('system/modules/repository/themes/default/images/dbcheck16.png')
 		);
 		$arrFunc[] = array
 		(
 			'type'  => 'function',
 			'name'  => 'f:Cache löschen',
 			'url'   => $this->base.'main.php?do=maintenance&quickjump4ward=doClearCache',
-			'image' => \Image::getHTML('cache.gif')
+			'image' => $this->generateImage('cache.gif')
 		);
 		$arrFunc[] = array
 		(
 			'type'  => 'function',
 			'name'  => 'f:Extension installieren',
 			'url'   => $this->base.'main.php?do=repository_manager&install=extension',
-			'image' => \Image::getHTML('system/modules/repository/themes/default/images/install16.png')
+			'image' => $this->generateImage('system/modules/repository/themes/default/images/install16.png')
 		);
 
 		foreach($arrFunc as $func)
@@ -181,7 +181,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'stylesheet',
 					'name'  => 'css:'.$data[0].':'.$objCategory->category,
 					'url'   => $this->base.'main.php?do=themes&table=tl_style&id='.$objCategory->id.'&category='.urlencode($objCategory->category),
-					'image' => \Image::getHTML('css.gif')
+					'image' => $this->generateImage('css.gif')
 				);
 			}
 		}
@@ -198,7 +198,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'stylesheet',
 					'name'  => 'css:'.$objStylesheets->name,
 					'url'   => $this->base.'main.php?do=themes&table=tl_style&id='.$objStylesheets->id,
-					'image' => \Image::getHTML('css.gif')
+					'image' => $this->generateImage('css.gif')
 				);
 			}
 		}
@@ -226,7 +226,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Module',
 					'url'   => $this->base.'main.php?do=themes&table=tl_module&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => \Image::getHTML('modules.gif')
+					'image' => $this->generateImage('modules.gif')
 				);
 			}
 			if(!strlen($data[1]) || strripos('Stylesheet',$data[1]) !== false)
@@ -236,7 +236,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Stylesheet',
 					'url'   => $this->base.'main.php?do=themes&table=tl_style_sheet&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => \Image::getHTML('css.gif')
+					'image' => $this->generateImage('css.gif')
 				);
 			}
 			if(!strlen($data[1]) || strripos('Pagelayout',$data[1]) !== false)
@@ -247,7 +247,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$data[0].':Pagelayout',
 					'url'   => $this->base.'main.php?do=themes&table=tl_layout&id='.array_search($data[0],$arrThemes).'&act=create&mode=2&pid='.array_search($data[0],$arrThemes),
-					'image' => \Image::getHTML('layout.gif')
+					'image' => $this->generateImage('layout.gif')
 				);
 			}
 		}
@@ -262,7 +262,7 @@ class Quickjump4ward extends \Backend {
 					'type'  => 'new',
 					'name'  => 'new:'.$name,
 					'url'   => $this->base.'main.php?do=themes',
-					'image' => \Image::getHTML('themes.gif')
+					'image' => $this->generateImage('themes.gif')
 				);
 			}
 		}
@@ -316,7 +316,7 @@ class Quickjump4ward extends \Backend {
 				'type'  => 'article',
 				'name'  => 'a:'.$objArticle->title,
 				'url'   => $this->base.'main.php?do=article&table=tl_content&id='.$objArticle->id,
-				'image' => \Image::getHTML('articles'.($published ? '' : '_').'.gif')
+				'image' => $this->generateImage('articles'.($published ? '' : '_').'.gif')
 			);
 
 		}
@@ -378,7 +378,7 @@ class Quickjump4ward extends \Backend {
 				'type'  => 'page',
 				'name'  => 'p:'.$objPage->title,
 				'url'   => $this->base.'main.php?do=page&act=edit&id='.$objPage->id,
-				'image' => \Image::getHTML($image, '')
+				'image' => $this->generateImage($image, '')
 			);
 
 		}
