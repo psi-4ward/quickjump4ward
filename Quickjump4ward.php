@@ -390,7 +390,7 @@ class Quickjump4ward extends \Backend {
 	{
 		if($this->User->quickjump4ward_enabled)
 		{
-			$GLOBALS['TL_JAVASCRIPT']['autocompleter'] = 'plugins/autocompleter/js/ac_compress.js';
+			$GLOBALS['TL_JAVASCRIPT']['autocompleter'] = 'assets/mootools/autocompleter/js/ac_compress.js';
 			$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.js';
 			$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.css';
 		}
