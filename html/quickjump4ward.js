@@ -1,4 +1,3 @@
-
 /**
  * Quickjump4ward
  * A Contao-Extension to quickly access cartain backend-modules
@@ -91,7 +90,7 @@ var Quickjump4ward = new Class({
 				)
 			)
 		);
-		
+
 		// Init autocompleter
 	    this.autocompleter = new Autocompleter.Request.JSON(this.input, 'system/modules/quickjump4ward/ajax.php', {
 	        'postVar': 's',
@@ -131,7 +130,7 @@ var Quickjump4ward = new Class({
 	    
 	    
 	    // Init hotkey
-		if(Browser.Engine.trident){
+		if(Browser.ie){
 			// Stupid IE....
 			$(document.body).addEvent('keydown',this.keypress.bind(this));
 		} else {
@@ -169,7 +168,7 @@ var Quickjump4ward = new Class({
 	 * Handle the form-submit that Autocompleter triggers
 	 */
 	onSubmit: function(e){
-		new Event(e).stop();
+		e.preventDefault();
 		if(this.currentHref == null){
 			// try to lunch first option
 			if(first = this.autocompleter.choices.getElement('li')){
@@ -187,10 +186,9 @@ var Quickjump4ward = new Class({
 	 */
 	keypress: function(e){
 		if((e.code == 106 || e.code == 74 || e.code == 17) && e.control) {
+			e.preventDefault();
 			this.input.focus();
-			return false;
 		}
-		return true;
 	},
 	
 	/**
