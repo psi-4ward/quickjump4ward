@@ -185,7 +185,7 @@ var Quickjump4ward = new Class({
 	 * Hotkey to jump into the autocompleter field
 	 */
 	keypress: function(e){
-		if((e.code == 106 || e.code == 74 || e.code == 17) && e.control) {
+		if((e.code == 106 || e.code == 74 || e.code == 17 || e.code == 10) && e.control) {
 			e.preventDefault();
 			this.input.focus();
 		}
