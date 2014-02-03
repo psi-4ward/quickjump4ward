@@ -16,7 +16,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../../initialize.php');
+require_once('../../../initialize.php');
 
 // return the results as json
 $x = new \Quickjump4ward\Quickjump4ward();
