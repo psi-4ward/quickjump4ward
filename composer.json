@@ -1,0 +1,44 @@
+{
+  "name": "psi/quickjump4ward",
+  "description": "Quickjump input field to quickly go to various pages",
+  "keywords": ["contao"],
+  "type": "contao-module",
+  "homepage": "https://github.com/psi-4ward/quickjump4ward",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Christoph Wiechert",
+      "email": "wio@psitrax.de",
+      "homepage": "http://4wardmedia.de",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "wio@psitrax.de",
+    "issues": "https://github.com/psi-4ward/quickjump4ward/issues",
+    "forum": "https://community.contao.org/de/forumdisplay.php?110-4ward",
+    "irc": "irc://irc.freenode.org/contao.dev",
+    "source": "https://github.com/psi-4ward/quickjump4ward"
+  },
+  "require": {
+    "php": ">=5.3",
+    "contao/core": ">=3.1,<3.3",
+    "psi/autocompleter-plugin": ">=1.1,<2.0"
+  },
+  "replace": {
+    "contao-legacy/quickjump4ward": "self.version"
+  },
+  "conflict": {
+    "contao/core": "3.0.*"
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "": "system/modules/quickjump4ward"
+      }
+    },
+    "branch-alias": {
+      "dev-master": "1.6.x-dev"
+    }
+  }
+}
