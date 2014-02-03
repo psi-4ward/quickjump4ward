@@ -304,35 +304,63 @@ class Quickjump4ward extends \Backend {
 			}
 			$pagemounts = array_unique($pagemounts);
 
-			$queryAddon = 'LEFT JOIN tl_page AS p ON (a.pid = p.id)';
 			$selectAddon = ',includeChmod,p.pid,chmod,cuser,cgroup';
 		}
 
-		$objArticle = $this->Database->prepare('SELECT a.id,a.title,a.published,a.start,a.stop,a.pid AS pageId
-                                                                                                                '.$selectAddon.'
-                                                                                                                FROM tl_article AS a
-                                                                                                                '.$queryAddon.'
-                                                                                                                WHERE a.title LIKE ? ORDER BY a.title')
+		$objArticle = $this->Database->prepare('SELECT a.id,a.title,a.published,a.start,a.stop,a.pid AS pageId,p.pid AS pagePid
+                                               '.$selectAddon.'
+                                               FROM tl_article AS a
+                                               LEFT JOIN tl_page AS p ON (a.pid = p.id)
+                                               WHERE a.title LIKE ? ORDER BY a.title')
 			->limit($this->limitEach)
 			->execute('%'.$s.'%');
 
-		while($objArticle->next())
+		// make duplicates unique (see #8)
+		$arrArticles = $objArticle->fetchAllAssoc();
+		foreach($arrArticles as $k => $article)
+		{
+			foreach($arrArticles as $j => $a2)
+			{
+				if($article['id'] != $a2['id'] && $article['title'] == $a2['title'])
+				{
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($article['pageId']);
+					$arrArticles[$k]['title'] = $objParent->title.' > '.$article['title'];
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($a2['pageId']);
+					$arrArticles[$j]['title'] = $objParent->title.' > '.$a2['title'];
+				}
+			}
+		}
+		foreach($arrArticles as $k => $article)
+		{
+			foreach($arrArticles as $j => $a2)
+			{
+				if($article['id'] != $a2['id'] && $article['title'] == $a2['title'])
+				{
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($article['pagePid']);
+					$arrArticles[$k]['title'] = $objParent->title.' > '.$article['title'];
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($a2['pagePid']);
+					$arrArticles[$j]['title'] = $objParent->title.' > '.$a2['title'];
+				}
+			}
+		}
+
+		foreach($arrArticles as $article)
 		{
 			// check rights
 			if (!$this->User->isAdmin)
 			{
-				if(!in_array($objArticle->pageId, $pagemounts)) continue;
-				if(!$this->User->isAllowed(4, $objArticle->row())) continue;
+				if(!in_array($article['pageId'], $pagemounts)) continue;
+				if(!$this->User->isAllowed(4, $article)) continue;
 			}
 
 			$time = time();
-			$published = ($objArticle->published && ($objArticle->start == '' || $objArticle->start < $time) && ($objArticle->stop == '' || $objArticle->stop > $time));
+			$published = ($article['published'] && ($article['start'] == '' || $article['start'] < $time) && ($article['stop'] == '' || $article['stop'] > $time));
 
 			$this->ret[] = array
 			(
 				'type'  => 'article',
-				'name'  => 'a:'.$objArticle->title,
-				'url'   => $this->base.'main.php?do=article&table=tl_content&id='.$objArticle->id,
+				'name'  => 'a:'.$article['title'],
+				'url'   => $this->base.'main.php?do=article&table=tl_content&id='.$article['id'],
 				'image' => $this->generateImage('articles'.($published ? '' : '_').'.gif')
 			);
 
@@ -365,36 +393,52 @@ class Quickjump4ward extends \Backend {
 			->limit($this->limitEach)
 			->execute('%'.$s.'%');
 
-		while($objPage->next())
+		// make duplicates unique (see #8)
+		$arrPages = $objPage->fetchAllAssoc();
+		foreach($arrPages as $k => $page)
+		{
+			foreach($arrPages as $j => $p2)
+			{
+				if($page['id'] != $p2['id'] && $page['title'] == $p2['title'])
+				{
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($page['pid']);
+					$arrPages[$k]['title'] = $objParent->title.' > '.$page['title'];
+					$objParent = $this->Database->prepare('SELECT title FROM tl_page WHERE id=?')->execute($p2['pid']);
+					$arrPages[$j]['title'] = $objParent->title.' > '.$p2['title'];
+				}
+			}
+		}
+
+		foreach($arrPages as $page)
 		{
 			// check rights
 			if (!$this->User->isAdmin)
 			{
-				if(!in_array($objPage->id, $pagemounts)) continue;
-				if(!$this->User->isAllowed(1, $objPage->row())) continue;
+				if(!in_array($page['id'], $pagemounts)) continue;
+				if(!$this->User->isAllowed(1, $page)) continue;
 			}
 
 			$sub = 0;
-			$image = $objPage->type.'.gif';
-			$objPage->protected = ($objPage->protected || $protectedPage);
+			$image = $page['type'].'.gif';
+			$page['protected'] = ($page['protected'] || $protectedPage);
 			// Page not published or not active
-			if ((!$objPage->published || $objPage->start && $objPage->start > time() || $objPage->stop && $objPage->stop < time()))
+			if ((!$page['published'] || $page['start'] && $page['start'] > time() || $page['stop'] && $page['stop'] < time()))
 				$sub += 1;
 			// Page hidden from menu
-			if ($objPage->hide && !in_array($objPage->type, array('redirect', 'forward', 'root', 'error_403', 'error_404')))
+			if ($page['hide'] && !in_array($page['type'], array('redirect', 'forward', 'root', 'error_403', 'error_404')))
 				$sub += 2;
 			// Page protected
-			if ($objPage->protected && !in_array($objPage->type, array('root', 'error_403', 'error_404')))
+			if ($page['protected'] && !in_array($page['type'], array('root', 'error_403', 'error_404')))
 				$sub += 4;
 			// Get image name
 			if ($sub > 0)
-				$image = $objPage->type.'_'.$sub.'.gif';
+				$image = $page['type'].'_'.$sub.'.gif';
 
 			$this->ret[] = array
 			(
 				'type'  => 'page',
-				'name'  => 'p:'.$objPage->title,
-				'url'   => $this->base.'main.php?do=page&act=edit&id='.$objPage->id,
+				'name'  => 'p:'.$page['title'],
+				'url'   => $this->base.'main.php?do=page&act=edit&id='.$page['id'],
 				'image' => $this->generateImage($image, '')
 			);
 
@@ -408,8 +452,8 @@ class Quickjump4ward extends \Backend {
 		if($this->User->quickjump4ward_enabled)
 		{
 			$GLOBALS['TL_JAVASCRIPT']['autocompleter'] = 'assets/mootools/autocompleter/js/ac_compress.js';
-			$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.js';
-			$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.css';
+			$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/public/quickjump4ward.js';
+			$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/public/quickjump4ward.css';
 		}
 
 		$GLOBALS['TL_MOOTOOLS'][] = '<script>window.QUICKJUMP4WARD = {mod: "'.$this->User->quickjump4ward_key_modifier.'", key: "'.$this->User->quickjump4ward_key.'"};</script>';
