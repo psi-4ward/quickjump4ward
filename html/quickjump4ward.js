@@ -1,14 +1,14 @@
 /**
  * Quickjump4ward
- * A Contao-Extension to quickly access cartain backend-modules
- * through typing
+ * Quickly jump to various contao pages and settings
  *
- * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
- * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @copyright  4ward.media 2014 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <wio@psitrax.de>
  * @package    quickjump4ward
  * @license    LGPL
  * @filesource
  */
+
 
 var Quickjump4ward = new Class({
 	
@@ -129,13 +129,20 @@ var Quickjump4ward = new Class({
 		}.bind(this));
 	    
 	    
-	    // Init hotkey
-		if(Browser.ie){
-			// Stupid IE....
-			$(document.body).addEvent('keydown',this.keypress.bind(this));
-		} else {
-			$(window).addEvent('keypress',this.keypress.bind(this));
-		}	    
+	  // Init hotkey
+    if(window.QUICKJUMP4WARD) {
+      if(window.QUICKJUMP4WARD.mod == 'alt' && window.QUICKJUMP4WARD.key == 'q') {
+        // unbind logout accesskey
+        document.getElement('*[accesskey=q]').removeProperty('accesskey');
+      }
+
+      $(window).addEvent('keydown:keys(' + window.QUICKJUMP4WARD.mod + '+' + window.QUICKJUMP4WARD.key + ')', function(ev) {
+        ev.preventDefault();
+        if(ev.stopPropagation) ev.stopPropagation();
+        if(ev.cancelBubble != null) ev.cancelBubble = true;
+        this.input.focus();
+      }.bind(this));
+    }
 	},
 
 
@@ -181,16 +188,7 @@ var Quickjump4ward = new Class({
 		return false;
 	},
 	
-	/**
-	 * Hotkey to jump into the autocompleter field
-	 */
-	keypress: function(e){
-		if((e.code == 106 || e.code == 74 || e.code == 17) && e.control) {
-			e.preventDefault();
-			this.input.focus();
-		}
-	},
-	
+
 	/**
 	 * Split the input for requesting a particular section
 	 * gets called from Autocompleter.Request

@@ -1,12 +1,11 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
- * A Contao-Extension to quickly access cartain backend-modules
- * through typing
+ * Quickly jump to various contao pages and settings
  *
- * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
- * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @copyright  4ward.media 2014 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <wio@psitrax.de>
  * @package    quickjump4ward
  * @license    LGPL
  * @filesource
@@ -18,7 +17,7 @@ $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['label'][0] = 'Quick
 
 $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 (
-	array('Hotkey', '<p>Mit der Tastenkombination <i>Strg-j</i> oder <i>Strg-q</i> kann direkt ins Quickjump-Feld gesprungen werden.</p>
+	array('Hotkey', '<p>Mit der Tastenkombination <i>alt-q</i> (kann im Profil verändert werden) kann direkt ins Quickjump-Feld gesprungen werden.</p>
 	<p>Per <i>Tab</i> wird die Vervollständigung erneut angestoßen um ggf. Unterobjekte abzurufen. Bei Problemen mit <i>Tab</i> kann auch die <i>Pfeil-nach-rechts</i> Taste verwendet werden.</p>
 	<p>Die <i>Enter</i>-Taste ruft die gewählte Seite auf.</p>'),
 	array('<u>p:</u> Seiten', 'Der Modifier <u>p:</u> sucht Seiten aus der Seitenstruktur.'),

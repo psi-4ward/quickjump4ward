@@ -2,15 +2,15 @@
 
 /**
  * Quickjump4ward
- * A Contao-Extension to quickly access cartain backend-modules
- * through typing
+ * Quickly jump to various contao pages and settings
  *
- * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
- * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @copyright  4ward.media 2014 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <wio@psitrax.de>
  * @package    quickjump4ward
  * @license    LGPL
  * @filesource
  */
+
 
 namespace Psi\Quickjump4ward;
 
@@ -124,13 +124,36 @@ class Quickjump4ward extends \Backend {
 	protected function addFunctions($s)
 	{
 		$arrFunc = array();
-		$arrFunc[] = array
-		(
-			'type'  => 'function',
-			'name'  => 'f:Database update',
-			'url'   => $this->base.'main.php?do=repository_manager&update=database',
-			'image' => $this->generateImage('system/modules/repository/themes/default/images/dbcheck16.png')
-		);
+
+		if(in_array('repository', \ModuleLoader::getActive()))
+		{
+			$arrFunc[] = array
+			(
+				'type'  => 'function',
+				'name'  => 'f:Database update',
+				'url'   => $this->base.'main.php?do=repository_manager&update=database',
+				'image' => $this->generateImage('system/modules/repository/themes/default/images/dbcheck16.png')
+			);
+			$arrFunc[] = array
+			(
+				'type'  => 'function',
+				'name'  => 'f:Extension installieren',
+				'url'   => $this->base.'main.php?do=repository_manager&install=extension',
+				'image' => $this->generateImage('system/modules/repository/themes/default/images/install16.png')
+			);
+		}
+
+		if(in_array('!composer', \ModuleLoader::getActive()))
+		{
+			$arrFunc[] = array
+			(
+				'type'  => 'function',
+				'name'  => 'f:Database update',
+				'url'   => $this->base.'main.php?do=composer&update=database',
+				'image' => $this->generateImage('system/modules/%21composer/assets/images/database_update.png')
+			);
+		}
+
 		$arrFunc[] = array
 		(
 			'type'  => 'function',
@@ -138,13 +161,7 @@ class Quickjump4ward extends \Backend {
 			'url'   => $this->base.'main.php?do=maintenance&quickjump4ward=doClearCache',
 			'image' => $this->generateImage('cache.gif')
 		);
-		$arrFunc[] = array
-		(
-			'type'  => 'function',
-			'name'  => 'f:Extension installieren',
-			'url'   => $this->base.'main.php?do=repository_manager&install=extension',
-			'image' => $this->generateImage('system/modules/repository/themes/default/images/install16.png')
-		);
+
 
 		foreach($arrFunc as $func)
 		{
@@ -394,6 +411,8 @@ class Quickjump4ward extends \Backend {
 			$GLOBALS['TL_JAVASCRIPT']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.js';
 			$GLOBALS['TL_CSS']['quickjump4ward'] = 'system/modules/quickjump4ward/html/quickjump4ward.css';
 		}
+
+		$GLOBALS['TL_MOOTOOLS'][] = '<script>window.QUICKJUMP4WARD = {mod: "'.$this->User->quickjump4ward_key_modifier.'", key: "'.$this->User->quickjump4ward_key.'"};</script>';
 
 		return $arrModules;
 	}

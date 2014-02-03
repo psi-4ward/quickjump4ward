@@ -1,12 +1,11 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
  * Quickjump4ward
- * A Contao-Extension to quickly access cartain backend-modules
- * through typing
+ * Quickly jump to various contao pages and settings
  *
- * @copyright  4ward.media 2012 <http://www.4wardmedia.de>
- * @author     Christoph Wiechert <christoph.wiechert@4wardmedia.de>
+ * @copyright  4ward.media 2014 <http://www.4wardmedia.de>
+ * @author     Christoph Wiechert <wio@psitrax.de>
  * @package    quickjump4ward
  * @license    LGPL
  * @filesource
@@ -18,7 +17,7 @@ $GLOBALS['TL_DCA']['quickjump4ward']['fields']['Quickjump']['label'][0] = 'Quick
 
 $GLOBALS['TL_LANG']['XPL']['quickjump4ward'] = array
 (
-	array('Hotkey', '<p>Use the shortcut <i>Ctrl-j</i> or <i>Ctrl-q</i> to focus the quickjump field.</p>
+	array('Hotkey', '<p>Use the shortcut <i>alt-q</i> (change it in your profile) to focus the quickjump field.</p>
 	<p>With <i>Tab</i> you can run the autocompletion again to select subobjects. If you have problem with the tab-key, you could also use the <i>right-arrow</i> key.</p>
 	<p>The <i>return</i>-key switches to the choosen object.</p>'),
 	array('<u>p:</u> Pages', 'The modifier <u>p:</u> searches onyl pages from the pagetree.'),
