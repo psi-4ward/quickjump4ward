@@ -92,7 +92,7 @@ var Quickjump4ward = new Class({
 		);
 
 		// Init autocompleter
-	    this.autocompleter = new Autocompleter.Request.JSON(this.input, 'system/modules/quickjump4ward/ajax.php', {
+	    this.autocompleter = new Autocompleter.Request.JSON(this.input, 'system/modules/quickjump4ward/public/ajax.php', {
 	        'postVar': 's',
 	        'injectChoice':this.generateChoice,
 	        'autoSubmit':true,
